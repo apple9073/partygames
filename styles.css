@@ -1,0 +1,152 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #a8e063, #56ab2f); /* Light green gradient background */
+  color: #333;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  width: 80%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: white;
+  color: #007BFF;
+  border: 1px solid #007BFF;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 80%;
+  max-width: 300px;
+}
+
+button:hover {
+  background-color: #007BFF;
+  color: white;
+}
+
+#cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+  justify-items: center; /* Centralizes the cards */
+}
+
+.card {
+  width: 150px;  /* Set a fixed size for better alignment */
+  height: 100px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transform: perspective(600px) rotateY(0);
+  transition: transform 0.5s;
+  overflow: hidden;
+  border: 1px solid #ccc;  /* Add light border around the cards */
+  position: relative;
+}
+
+.card .word {
+  display: none; /* Hide word by default */
+  font-size: 1.5rem;
+}
+
+.card.flipped .word {
+  display: block; /* Show word only when card is flipped */
+}
+
+.card-number {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007BFF;  /* You can change the color as per your design */
+  background-color: white;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .input-section {
+    flex-direction: column;
+  }
+
+  input,
+  button {
+    width: 90%;
+    max-width: none; /* Allow them to use full width on smaller screens */
+  }
+
+  .card {
+    width: 120px; /* Make cards smaller on mobile */
+    height: 80px;
+    font-size: 1rem;
+  }
+
+  .card-number {
+    font-size: 1rem; /* Make numbers smaller on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .card {
+    width: 100px; /* Even smaller cards on very small screens */
+    height: 70px;
+    font-size: 0.9rem;
+  }
+
+  .card-number {
+    font-size: 0.9rem; /* Adjust numbers for smaller screens */
+  }
+}
