@@ -48,11 +48,19 @@ generateCardsButton.addEventListener("click", () => {
 
   // Randomize word group selection
   const selectedGroup = wordGroups[Math.floor(Math.random() * wordGroups.length)];
-  
+
+  // Determine the number of spies based on player count
+  let numberOfSpies = 1;
+  if (playerCount >= 6 && playerCount <= 10) {
+    numberOfSpies = 2;
+  } else if (playerCount >= 11) {
+    numberOfSpies = 3;
+  }
+
   // Generate cards with the selected word group
   const cardWords = [];
   for (let i = 0; i < playerCount; i++) {
-    const word = i === 0 ? selectedGroup[0] : selectedGroup[1];  // Assign the first word to one card, and the second word to the rest
+    const word = i < numberOfSpies ? selectedGroup[0] : selectedGroup[1]; // Assign the spy word to the first 'numberOfSpies' cards
     cardWords.push(word);
   }
 
@@ -63,7 +71,7 @@ generateCardsButton.addEventListener("click", () => {
   cardWords.forEach((word, index) => {
     const card = document.createElement("div");
     card.classList.add("card");
-    
+
     // Create a hidden div to hold the word
     const wordDiv = document.createElement("div");
     wordDiv.classList.add("word");
@@ -72,10 +80,10 @@ generateCardsButton.addEventListener("click", () => {
     // Add a number on the card
     const numberDiv = document.createElement("div");
     numberDiv.classList.add("card-number");
-    numberDiv.innerText = index + 1;  // Display a number starting from 1
+    numberDiv.innerText = index + 1; // Display a number starting from 1
 
-    card.appendChild(numberDiv);  // Add number div to the card
-    card.appendChild(wordDiv);  // Add word div to the card
+    card.appendChild(numberDiv); // Add number div to the card
+    card.appendChild(wordDiv); // Add word div to the card
 
     card.addEventListener("click", () => {
       card.classList.toggle("flipped");
@@ -84,3 +92,4 @@ generateCardsButton.addEventListener("click", () => {
     cardsContainer.appendChild(card);
   });
 });
+
