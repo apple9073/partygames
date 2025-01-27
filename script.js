@@ -92,4 +92,3 @@ generateCardsButton.addEventListener("click", () => {
     cardsContainer.appendChild(card);
   });
 });
-

@@ -147,6 +147,61 @@ button:hover {
   }
 
   .card-number {
-    font-size: 0.9rem; /* Adjust numbers for smaller screens */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem; /* Adjust font size as needed */
+    font-weight: bold;
+    color: #007BFF; /* Customize color */
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    z-index: 1; /* Ensure it appears above other elements */
   }
+}
+
+.rules-section {
+  background-color: #f9f9f9; /* Light background for the rules section */
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: left; /* Align text to the left for readability */
+}
+
+.rules-section h2 {
+  font-size: 1.8rem;
+  color: #007BFF;
+  margin-bottom: 15px;
+}
+
+.rules-section h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.rules-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.rules-section ol {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.rules-section ol li, 
+.rules-section ul li {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.rules-section ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+  list-style-type: disc; /* Change bullet style for unordered list */
 }
