@@ -17,24 +17,70 @@ let timer;
 let timeRemaining;
 let successCount = 0;
 let currentWordIndex = 0;
-let words = []; // Initialize an empty array for words
 
-// Fetch the words from the JSON file
-fetch('words.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    words = data.words; // Assign the words from the JSON file
-    console.log('Words loaded successfully:', words); // Debugging: Log the words
-  })
-  .catch(error => {
-    console.error('Error loading words:', error);
-    alert('Failed to load words. Please check the console for details.');
-  });
+const words = [
+  // Easy and common nouns
+  "Elephant", "Pizza", "Bicycle", "Candle", "Sunflower", "Rainbow", "Dragon", "Coconut", 
+  "Mountain", "Jellyfish", "Volcano", "Robot", "Banana", "Backpack", "Mermaid", "Whale",
+  "Croissant", "Lasagna", "Milkshake", "Espresso", "Sushi", "Lemonade", "Avocado", "Cinnamon", 
+  
+  // Abstract concepts & actions
+  "Friendship", "Dream", "Fear", "Victory", "Jealousy", "Peace", "Revolution", "Invention", 
+  "Freedom", "Curiosity", "Dance", "Meditation", "Silence", "Adventure", "Regret", "Hope",
+  "Wisdom", "Chaos", "Kindness", "Patience", "Destiny", "Truth", "Harmony", "Courage",
+
+  // Historical & cultural references
+  "Pyramid", "Gladiator", "Samurai", "Renaissance", "Viking", "Jazz", "Carnival", "Myth", 
+  "Tornado", "Telescope", "Parade", "Lantern", "Alchemy", "Opera", "Mosaic", "Goddess", 
+  "Crusader", "Dynasty", "Catapult", "Colosseum", "Monk", "Pharaoh", "Citadel", "Bazaar",
+  
+  // Fantasy & mythology
+  "Unicorn", "Wizard", "Phoenix", "Griffin", "Castle", "Potion", "Sorcerer", "Labyrinth", 
+  "Sphinx", "Fairy", "Chimera", "Giant", "Genie", "Wand", "Oracle", "Goblin", "Elf", 
+  "Werewolf", "Mermaid", "Knight", "Pegasus", "Dragon", "Dwarf", "Rune", "Chant", 
+  
+  // Technology & modern life
+  "Internet", "Smartphone", "Drone", "Satellite", "Laser", "Hologram", "Selfie", "Hashtag", 
+  "Password", "Laptop", "Emoji", "Headphones", "Podcast", "Avatar", "Cloud", "WiFi", 
+  "Gadget", "Bluetooth", "Joystick", "Screenshot", "Algorithm", "Firewall", "Inbox", "Backup", 
+  
+  // Difficult & unique words (to increase challenge)
+  "Origami", "Palindrome", "Kaleidoscope", "Silhouette", "Quicksand", "Echo", "Symphony", "Paradox", 
+  "Constellation", "Eclipse", "Mirage", "Espionage", "Geyser", "Camouflage", "Oasis", "Quarantine", 
+  "Zenith", "Labyrinth", "Monolith", "Renaissance", "Cipher", "Prophecy", "Epitome", "Antique", 
+  
+  // Nature & geography
+  "Canyon", "Savanna", "Glacier", "Lagoon", "Tundra", "Coral", "Waterfall", "Mangrove", 
+  "Desert", "Oasis", "Horizon", "Typhoon", "Jungle", "Monsoon", "Cave", "Fjord", "Geyser", 
+  "Volcano", "Meadow", "Blizzard", "Archipelago", "Delta", "Cliff", "Prairie", "Dune",
+  
+  // Everyday objects & actions
+  "Umbrella", "Suitcase", "Parachute", "Swing", "Wheelbarrow", "Ladder", "Mailbox", "Lantern", 
+  "Teapot", "Flashlight", "Magnifying Glass", "Hammock", "Trampoline", "Fishing Rod", "Compass", 
+  "Shoelace", "Notebook", "Calendar", "Helmet", "Scissors", "Backpack", "Binoculars", "Rope", 
+  
+  // Animals & nature
+  "Platypus", "Toucan", "Armadillo", "Hedgehog", "Koala", "Chameleon", "Octopus", "Peacock", 
+  "Flamingo", "Parrot", "Panther", "Swan", "Lynx", "Walrus", "Otter", "Cobra", "Seahorse", 
+  "Pelican", "Stingray", "Giraffe", "Meerkat", "Badger", "Salmon", "Wombat", "Sloth", 
+  
+  // More fun and random words
+  "Mimicry", "Odyssey", "Carnivore", "Fossil", "Nomad", "Riddle", "Zodiac", "Dystopia", 
+  "Metaphor", "Alchemy", "Chronicle", "Catacomb", "Artifact", "Galaxy", "Talisman", "Meteor", 
+  "Crown", "Parrot", "Badge", "Trophy", "Canoe", "Feather", "Lantern", "Monument", 
+
+  // Historical figures (optional fun twist)
+  "Einstein", "Cleopatra", "Napoleon", "Shakespeare", "Tesla", "Da Vinci", "Beethoven", "Gandhi"
+];
+
+// Function to shuffle an array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
+  return array;
+}
 
 // Start the timer
 startTimerButton.addEventListener("click", () => {
@@ -42,11 +88,6 @@ startTimerButton.addEventListener("click", () => {
 
   if (!minutes || minutes < 1 || minutes > 5) {
     alert("Please enter a valid number of minutes (1–5).");
-    return;
-  }
-
-  if (words.length === 0) {
-    alert("Words are still loading. Please try again in a moment.");
     return;
   }
 
@@ -92,13 +133,6 @@ function startTimer() {
     const seconds = timeRemaining % 60;
     timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
 
-    // Blink timer at 15 seconds
-    if (timeRemaining <= 15) {
-      timerDisplay.classList.add("blink");
-    } else {
-      timerDisplay.classList.remove("blink"); // Remove blinking when time is above 15 seconds
-    }
-
     if (timeRemaining <= 0) {
       clearInterval(timer);
       endGame();
@@ -134,7 +168,6 @@ function endGame() {
   wordSection.style.display = "none";
   resultsSection.style.display = "block";
   successCountDisplay.textContent = successCount;
-  timerDisplay.classList.remove("blink"); // Stop blinking
 }
 
 // Play again
