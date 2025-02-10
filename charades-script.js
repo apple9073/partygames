@@ -21,11 +21,20 @@ let words = []; // Initialize an empty array for words
 
 // Fetch the words from the JSON file
 fetch('words.json')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
   .then(data => {
     words = data.words; // Assign the words from the JSON file
+    console.log('Words loaded successfully:', words); // Debugging: Log the words
   })
-  .catch(error => console.error('Error loading words:', error));
+  .catch(error => {
+    console.error('Error loading words:', error);
+    alert('Failed to load words. Please check the console for details.');
+  });
 
 // Start the timer
 startTimerButton.addEventListener("click", () => {
@@ -33,6 +42,11 @@ startTimerButton.addEventListener("click", () => {
 
   if (!minutes || minutes < 1 || minutes > 5) {
     alert("Please enter a valid number of minutes (1–5).");
+    return;
+  }
+
+  if (words.length === 0) {
+    alert("Words are still loading. Please try again in a moment.");
     return;
   }
 
