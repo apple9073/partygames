@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -17,8 +18,53 @@ body {
 h1 {
   font-size: 1.8rem;
   margin-bottom: 20px;
+  color: #007BFF; /* Consistent heading color */
 }
 
+/* Game Options Section */
+.game-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.game-card {
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit text color */
+}
+
+.game-card .card {
+  width: 250px;
+  height: 150px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card .card:hover {
+  transform: translateY(-5px); /* Add a slight lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.game-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #007BFF; /* Blue color for headings */
+}
+
+.game-card p {
+  font-size: 1rem;
+  color: #555; /* Gray color for descriptions */
+}
+
+/* Input Section */
 .input-section {
   display: flex;
   flex-direction: column;
@@ -59,6 +105,7 @@ button:hover {
   color: white;
 }
 
+/* Cards Container */
 #cardsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -133,6 +180,24 @@ button:hover {
   .card-number {
     font-size: 1rem; /* Make numbers smaller on mobile */
   }
+
+  .game-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-card .card {
+    width: 200px;
+    height: 120px;
+  }
+
+  .game-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .game-card p {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -162,6 +227,7 @@ button:hover {
   }
 }
 
+/* Rules Section */
 .rules-section {
   background-color: #f9f9f9; /* Light background for the rules section */
   padding: 20px;
@@ -204,4 +270,77 @@ button:hover {
   padding-left: 20px;
   margin-bottom: 10px;
   list-style-type: disc; /* Change bullet style for unordered list */
+}
+
+/* Word Guess/Charades Specific Styles */
+.timer-display {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.word-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.word-section .card {
+  width: 200px;
+  height: 100px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 20px;
+}
+
+.word-section .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.word-section button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#successButton {
+  background-color: #28a745;
+  color: white;
+}
+
+#passButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.results-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#playAgain {
+  padding: 15px 30px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Live Success Counter */
+.live-success-count {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333; /* Match the "Time Remaining" color */
 }
